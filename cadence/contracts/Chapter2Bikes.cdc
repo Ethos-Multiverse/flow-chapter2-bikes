@@ -90,7 +90,7 @@ pub contract Chapter2Bikes: NonFungibleToken {
   }
 
   // Collection resource for managing Chapter2Bikes NFTs
-  pub resource Collection: NonFungibleToken.Receiver, NonFungibleToken.Provider, NonFungibleToken.CollectionPublic, CollectionPublic {
+  pub resource Collection: NonFungibleToken.Receiver, NonFungibleToken.Provider, NonFungibleToken.CollectionPublic, CollectionPublic, MetadataViews.ResolverCollection {
 
     pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
     
@@ -126,6 +126,12 @@ pub contract Chapter2Bikes: NonFungibleToken {
       } else {
         return nil
       }
+    }
+
+    pub fun borrowViewResolver(id: UInt64): &AnyResource{MetadataViews.Resolver} {
+      let nft = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
+      let chapter2NFT = nft as! &Chapter2Bikes.NFT
+      return chapter2NFT as &AnyResource{MetadataViews.Resolver}
     }
 
     // Collection initialization
