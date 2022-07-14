@@ -39,24 +39,6 @@ pub contract Chapter2Bikes: NonFungibleToken {
 
     pub var metadata: {String: String}
 
-    pub fun getViews(): [Type] {
-      return [
-          Type<MetadataViews.Display>()
-      ]
-    }
-
-    pub fun resolveView(_ view: Type): AnyStruct? {
-      switch view {
-          case Type<MetadataViews.Display>():
-          return MetadataViews.Display(
-              name: self.metadata["name"]!,
-              description: self.metadata["description"]!,
-              thumbnail: MetadataViews.HTTPFile(url: self.metadata["external_url"]!)
-          )
-      }
-      return nil 
-    }
-
     init(_edition: UInt8, _metadata: {String: String}) {
       self.id = Chapter2Bikes.totalSupply
       self.edition = _edition
@@ -78,6 +60,37 @@ pub contract Chapter2Bikes: NonFungibleToken {
       // Emit Minted Event
       emit Minted(id: self.id)
     }
+
+    pub fun getViews(): [Type] {
+      return [
+          Type<MetadataViews.Display>(),
+          Type<MetadataViews.Editions>(),
+          Type<MetadataViews.ExternalURL>(),
+          Type<MetadataViews.NFTCollectionData>(),
+          Type<MetadataViews.NFTCollectionDisplay>
+      ]
+    }
+
+    pub fun resolveView(_ view: Type): AnyStruct? {
+      switch view {
+          case Type<MetadataViews.Display>():
+            return MetadataViews.Display(
+                name: self.metadata["name"]!,
+                description: self.metadata["description"]!,
+                thumbnail: MetadataViews.HTTPFile(url: self.metadata["external_url"]!)
+            )
+          case Type<MetadataViews.Editions>():
+            // 50 Frame editions and 20 Painting editions
+            let frameEditionInfo = MetadataViews.Edition(name: "Chapter2Bikes Frame Edition", number: self.id, max: 50)
+            let paintingEditionInfo = MetadataViews.Edition(name: "Chapter2Bikes Painting Edition", number: self.id, max: 20)
+            let editionList: [MetadataViews.Edition] = [frameEditionInfo, paintingEditionInfo]
+            return MetadataViews.Editions(editionList)
+          case Type<MetadataViews.ExternalURL>():
+            return MetadataViews.ExternalURL("https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-50-00.png")
+      }
+      return nil 
+    }
+
   }
 
   // Public Interface for Collection resource
