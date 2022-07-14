@@ -87,6 +87,18 @@ pub contract Chapter2Bikes: NonFungibleToken {
             return MetadataViews.Editions(editionList)
           case Type<MetadataViews.ExternalURL>():
             return MetadataViews.ExternalURL("https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-50-00.png")
+          case Type<MetadataViews.NFTCollectionData>():
+            return MetadataViews.NFTCollectionData(
+                storagePath: Chapter2Bikes.CollectionStoragePath,
+                publicPath: Chapter2Bikes.CollectionPublicPath,
+                providerPath: /private/Chapter2BikesCollection,
+                publicCollection: Type<&Chapter2Bikes.Collection{Chapter2Bikes.CollectionPublic}>(),
+                publicLinkedType: Type<&Chapter2Bikes.Collection{Chapter2Bikes.CollectionPublic, NonFungibleToken.CollectionPublic, NonFungibleToken.Receiver, MetadataViews.ResolverCollection}>(),
+                providerLinkedType: Type<&Chapter2Bikes.Collection{Chapter2Bikes.CollectionPublic, NonFungibleToken.CollectionPublic, NonFungibleToken.Provider, MetadataViews.ResolverCollection}>(),
+                createEmptyCollectionFunction: (fun (): @NonFungibleToken.Collection {
+                  return <- Chapter2Bikes.createEmptyCollection()
+                })
+            )
       }
       return nil 
     }
