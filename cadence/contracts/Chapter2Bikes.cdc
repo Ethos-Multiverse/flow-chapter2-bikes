@@ -99,6 +99,27 @@ pub contract Chapter2Bikes: NonFungibleToken {
                   return <- Chapter2Bikes.createEmptyCollection()
                 })
             )
+          case Type<MetadataViews.NFTCollectionDisplay>():
+            let frameMedia = MetadataViews.Media(
+              file: MetadataViews.HTTPFile(url: "https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-50-00.png"),
+              mediaType: "video/mp4"
+            )
+            let paintingMedia = MetadataViews.Media(
+              file: MetadataViews.HTTPFile(url: "https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-20-00.png"),
+              mediaType: "image/png"
+            )
+            return MetadataViews.NFTCollectionDisplay(
+              name: "Chapter2Bikes Collection",
+              description: "Chapter2Bikes collection description",
+              externalURL: MetadataViews.ExternalURL("https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-50-00.png"),
+              frameImage: frameMedia,
+              paintingImage: paintingMedia,
+              socials: {
+                "twitter": "https://twitter.com/ethos_io",
+                "facebook": "https://facebook.com/ethos.io",
+                "instagram": "https://instagram.com/ethos.io"
+              }
+            )
       }
       return nil 
     }
