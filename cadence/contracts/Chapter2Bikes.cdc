@@ -187,20 +187,26 @@ pub contract Chapter2Bikes: NonFungibleToken {
 
   // Contract initialization
   init() {
+    // Initialize all supplys
+    self.totalSupply = 0
+    self.frameEditionSupply = 0
+    self.paintingEditionSupply = 0
+
     // Set named paths
-      self.CollectionStoragePath = /storage/Chapter2BikesCollection
-      self.CollectionPublicPath = /public/Chapter2BikesCollection
-      self.AdminStoragePath = /storage/Chapter2BikesAdmin
-      self.AdminPrivatePath = /private/Chapter2BikesAdminUpgrade
+    self.CollectionStoragePath = /storage/Chapter2BikesCollection
+    self.CollectionPublicPath = /public/Chapter2BikesCollection
+    self.AdminStoragePath = /storage/Chapter2BikesAdmin
+    self.AdminPrivatePath = /private/Chapter2BikesAdminUpgrade
 
-      self.totalSupply = 0
-      self.frameEditionSupply = 0
-      self.paintingEditionSupply = 0
+    // Create admin resource and save it to storage
+    self.account.save(<-create Admin(), to: self.AdminStoragePath)
 
-      // Create admin resource and save it to storage
-      self.account.save(<-create Admin(), to: self.AdminStoragePath)
+    // Create a Collection resource and save it to storage
+    let collection <- create Collection()
+    self.account.save(<-collection, to: self.CollectionStoragePath)
 
-      self.account.link<&Chapter2Bikes.Admin>(self.AdminPrivatePath, target: self.AdminStoragePath) ?? panic("Could not get Admin capability")
+    // Create a private capability fot the admin resource
+    self.account.link<&Chapter2Bikes.Admin>(self.AdminPrivatePath, target: self.AdminStoragePath) ?? panic("Could not get Admin capability")
   }
 
 }
