@@ -67,7 +67,7 @@ pub contract Chapter2Bikes: NonFungibleToken {
           Type<MetadataViews.Editions>(),
           Type<MetadataViews.ExternalURL>(),
           Type<MetadataViews.NFTCollectionData>(),
-          Type<MetadataViews.NFTCollectionDisplay>
+          Type<MetadataViews.NFTCollectionDisplay>()
       ]
     }
 
@@ -115,9 +115,7 @@ pub contract Chapter2Bikes: NonFungibleToken {
               frameImage: frameMedia,
               paintingImage: paintingMedia,
               socials: {
-                "twitter": "https://twitter.com/ethos_io",
-                "facebook": "https://facebook.com/ethos.io",
-                "instagram": "https://instagram.com/ethos.io"
+                "twitter": MetadataViews.ExternalURL("https://twitter.com/ethos_io")
               }
             )
       }
