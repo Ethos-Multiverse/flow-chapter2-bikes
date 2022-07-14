@@ -205,6 +205,12 @@ pub contract Chapter2Bikes: NonFungibleToken {
     let collection <- create Collection()
     self.account.save(<-collection, to: self.CollectionStoragePath)
 
+    // Create a public capability for the collection
+    self.account.link<&Chapter2Bikes.Collection{NonFungibleToken.CollectionPublic, Chapter2Bikes.CollectionPublic, MetadataViews.ResolverCollection}>(
+      self.CollectionPublicPath,
+      target: self.CollectionStoragePath
+    )
+
     // Create a private capability fot the admin resource
     self.account.link<&Chapter2Bikes.Admin>(self.AdminPrivatePath, target: self.AdminStoragePath) ?? panic("Could not get Admin capability")
   }
