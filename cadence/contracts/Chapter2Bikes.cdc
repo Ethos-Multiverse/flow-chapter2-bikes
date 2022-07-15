@@ -26,8 +26,8 @@ pub contract Chapter2Bikes: NonFungibleToken {
 
   // Each NFT is associated to an Edition/Type: Frame or Painting.
   pub enum Edition: UInt8 {
-    pub case frame
-    pub case painting
+    pub case Frame
+    pub case Painting
   }
 
   // Resource that represents the a Chapter2Bikes NFT
@@ -220,9 +220,9 @@ pub contract Chapter2Bikes: NonFungibleToken {
   // Map edition type to string
   pub fun editionString(_ edition: Edition): String {
     switch edition {
-      case Edition.frame:
+      case Edition.Frame:
         return "Frame"
-      case Edition.painting:
+      case Edition.Painting:
         return "Painting"
     }
     return ""
