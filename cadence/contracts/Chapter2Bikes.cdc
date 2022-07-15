@@ -257,6 +257,8 @@ pub contract Chapter2Bikes: NonFungibleToken {
 
     // Create a private capability fot the admin resource
     self.account.link<&Chapter2Bikes.Admin>(self.AdminPrivatePath, target: self.AdminStoragePath) ?? panic("Could not get Admin capability")
+
+    emit ContractInitialized()
   }
 
 }
