@@ -34,11 +34,11 @@ pub contract Chapter2Bikes: NonFungibleToken {
   pub resource NFT: NonFungibleToken.INFT, MetadataViews.Resolver {
     pub let id: UInt64
 
-    pub let edition: UInt8
+    pub let edition: Chapter2Bikes.Edition
 
     pub var metadata: {String: String}
 
-    init(_edition: UInt8, _metadata: {String: String}) {
+    init(_edition: Chapter2Bikes.Edition, _metadata: {String: String}) {
       self.id = Chapter2Bikes.totalSupply
       self.edition = _edition
       self.metadata = _metadata
@@ -47,9 +47,9 @@ pub contract Chapter2Bikes: NonFungibleToken {
       Chapter2Bikes.totalSupply = Chapter2Bikes.totalSupply + 1
 
       // Edition Supply
-      if (_edition == 0) {
+      if (_edition == Edition.Frame) {
         Chapter2Bikes.frameEditionSupply = Chapter2Bikes.frameEditionSupply + 1
-      } else if (_edition == 1) {
+      } else if (_edition == Edition.Painting) {
         Chapter2Bikes.paintingEditionSupply = Chapter2Bikes.paintingEditionSupply + 1
       } else {
         // Invalid Edition
@@ -190,14 +190,14 @@ pub contract Chapter2Bikes: NonFungibleToken {
   // Admin Resource
   pub resource Admin {
     // mint Chapter2 NFT
-    pub fun mint(recipient: &{NonFungibleToken.CollectionPublic}, edition: UInt8, metadata: {String: String}) {
+    pub fun mint(recipient: &{NonFungibleToken.CollectionPublic}, edition: Chapter2Bikes.Edition, metadata: {String: String}) {
         var newNFT <- create NFT(_edition: edition, _metadata: metadata)
 
         recipient.deposit(token: <- newNFT)
     }
 
     // batch mint Chapter2 NFT
-    pub fun batchMint(recipient: &{NonFungibleToken.CollectionPublic}, edition: UInt8, metadataArray: [{String: String}]) {
+    pub fun batchMint(recipient: &{NonFungibleToken.CollectionPublic}, edition: Chapter2Bikes.Edition, metadataArray: [{String: String}]) {
         var i: Int = 0
         while i < metadataArray.length {
             self.mint(recipient: recipient, edition: edition, metadata: metadataArray[i])
