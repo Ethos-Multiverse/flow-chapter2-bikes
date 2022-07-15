@@ -10,7 +10,6 @@ pub contract Chapter2Bikes: NonFungibleToken {
   pub event Withdraw(id: UInt64, from: Address?)
   pub event Deposit(id: UInt64, to: Address?)
   pub event Minted(id: UInt64)
-  pub event NFTDestroyed(id: UInt64)
 
   // Named Paths
   pub let CollectionStoragePath: StoragePath
