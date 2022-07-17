@@ -5,6 +5,8 @@ transaction(edition: UInt8, metadata: [{String: String}]) {
 
 let adminCheck: &Chapter2Bikes.Admin
 
+var editionCheck: Chapter2Bikes.Edition
+
 let receiver: &{NonFungibleToken.CollectionPublic}
 
   prepare(acct: AuthAccount) {
@@ -31,8 +33,19 @@ let receiver: &{NonFungibleToken.CollectionPublic}
 
     }
 
+    self.editionCheck = Chapter2Bikes.Edition.Frame
+
     self.adminCheck = acct.borrow<&Chapter2Bikes.Admin>(from: Chapter2Bikes.AdminStoragePath)
     ?? panic("could not borrow admin reference")
+
+    // Edition Check
+    if (edition == 0) {
+      self.editionCheck = Chapter2Bikes.Edition.Frame
+    } else if (edition == 1) {
+      self.editionCheck = Chapter2Bikes.Edition.Painting
+    } else {
+      panic("Invalid edition type: 0(Frame) or 1(Painting)")
+    }
 
     self.receiver = acct.getCapability<&Chapter2Bikes.Collection{NonFungibleToken.CollectionPublic}>(Chapter2Bikes.CollectionPublicPath).borrow()
     ?? panic("could not borrow capability")
@@ -40,7 +53,7 @@ let receiver: &{NonFungibleToken.CollectionPublic}
   }
 
   execute {
-    self.adminCheck.batchMint(recipient: self.receiver, edition: edition, metadataArray: metadata)
+    self.adminCheck.batchMint(recipient: self.receiver, edition: self.editionCheck, metadataArray: metadata)
     log("minted NFT in account 1")
   }
 }
