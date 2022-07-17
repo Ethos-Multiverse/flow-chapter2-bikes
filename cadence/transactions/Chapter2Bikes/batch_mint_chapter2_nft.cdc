@@ -54,6 +54,6 @@ let receiver: &{NonFungibleToken.CollectionPublic}
 
   execute {
     self.adminCheck.batchMint(recipient: self.receiver, edition: self.editionCheck, metadataArray: metadata)
-    log("minted NFT in account 1")
+    log("Batch mint succesful")
   }
 }

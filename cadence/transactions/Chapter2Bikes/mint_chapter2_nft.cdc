@@ -46,7 +46,7 @@ prepare(acct: AuthAccount) {
   } else {
     panic("Invalid edition type: 0(Frame) or 1(Painting)")
   }
-  
+
   self.receiver = acct.getCapability<&Chapter2Bikes.Collection{NonFungibleToken.CollectionPublic}>(Chapter2Bikes.CollectionPublicPath).borrow()
   ?? panic("could not borrow capability")
 
@@ -54,7 +54,6 @@ prepare(acct: AuthAccount) {
 
 execute {
   self.adminCheck.mint(recipient: self.receiver, edition: self.editionCheck, metadata: metadata)
-
-  log("minted NFT in account 1")
+  log("Mint successful")
 }
 }
