@@ -1,5 +1,5 @@
-// import NonFungibleToken from "../standards/NonFungibleToken.cdc";
-// import MetadataViews from "../standards/MetadataViews.cdc";
+import NonFungibleToken from "../standards/NonFungibleToken.cdc";
+import MetadataViews from "../standards/MetadataViews.cdc";
 
 pub contract Chapter2Bikes: NonFungibleToken {
 
