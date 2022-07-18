@@ -84,7 +84,7 @@ pub contract Chapter2Bikes: NonFungibleToken {
             let editionList: [MetadataViews.Edition] = [frameEditionInfo, paintingEditionInfo]
             return MetadataViews.Editions(editionList)
           case Type<MetadataViews.ExternalURL>():
-            return MetadataViews.ExternalURL("https://chapter2.ethosnft.com")
+            return MetadataViews.ExternalURL("https://chapter2bikes.ethosnft.com")
           case Type<MetadataViews.NFTCollectionData>():
             return MetadataViews.NFTCollectionData(
                 storagePath: Chapter2Bikes.CollectionStoragePath,
