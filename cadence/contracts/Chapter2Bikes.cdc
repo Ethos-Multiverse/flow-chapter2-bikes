@@ -80,8 +80,8 @@ pub contract Chapter2Bikes: NonFungibleToken {
             )
           case Type<MetadataViews.Editions>():
             // 50 Frame editions and 20 Painting editions
-            let frameEditionInfo = MetadataViews.Edition(name: "Chapter2Bikes Frame Edition", number: self.id, max: 50)
-            let paintingEditionInfo = MetadataViews.Edition(name: "Chapter2Bikes Painting Edition", number: self.id, max: 20)
+            let frameEditionInfo = MetadataViews.Edition(name: "Chapter2 B Harms Special Projects: Owners NFT 2022", number: self.id, max: 50)
+            let paintingEditionInfo = MetadataViews.Edition(name: "B Harms Special Projects: “the second chapter”", number: self.id, max: 20)
             let editionList: [MetadataViews.Edition] = [frameEditionInfo, paintingEditionInfo]
             return MetadataViews.Editions(editionList)
           case Type<MetadataViews.ExternalURL>():
