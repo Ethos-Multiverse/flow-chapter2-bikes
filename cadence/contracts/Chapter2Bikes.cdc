@@ -49,7 +49,10 @@ pub contract Chapter2Bikes: NonFungibleToken {
   // Emmited when a LoveJulesLeather NFT is minted
   pub event Minted(id: UInt64)
 
-  // Named Paths
+  // -----------------------------------------------------------------------
+  // Chapter2Bikes Named Paths
+  // -----------------------------------------------------------------------
+
   pub let CollectionStoragePath: StoragePath
   pub let CollectionPublicPath: PublicPath
   pub let AdminStoragePath: StoragePath
