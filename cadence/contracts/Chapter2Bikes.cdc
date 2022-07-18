@@ -212,6 +212,11 @@ pub contract Chapter2Bikes: NonFungibleToken {
     }
   }
 
+  // Public interface for Admin Proxy
+  pub resource interface AdminProxyPublic {
+    pub fun giveAdminRights(cap: Capability<&Admin>)
+  }
+
   // Contract Level Function Defenitions
 
   // Public function to create an empty collection
