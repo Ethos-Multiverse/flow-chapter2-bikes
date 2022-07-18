@@ -204,7 +204,7 @@ pub contract Chapter2Bikes: NonFungibleToken {
   }
 
   // Collection is a resource that every user who owns NFTs
-  // will store in theit account to manage their NFTs
+  // will store in their account to manage their NFTs
   pub resource Collection: NonFungibleToken.Receiver, NonFungibleToken.Provider, NonFungibleToken.CollectionPublic, CollectionPublic, MetadataViews.ResolverCollection {
     // dictionary of NFT conforming tokens
     // NFT is a resource type with an UInt64 ID field
@@ -308,12 +308,12 @@ pub contract Chapter2Bikes: NonFungibleToken {
     }
   }
 
-  // Public interface for Admin Proxy
+  // The interface that Admins can use to give adminRights to other users
   pub resource interface AdminProxyPublic {
     pub fun giveAdminRights(cap: Capability<&Admin>)
   }
 
-  // Admin Proxy Resource
+  // AdminProxy is a resource that allows the owner to give admin rights to other users
   pub resource AdminProxy: AdminProxyPublic {
     access(self) var cap: Capability<&Admin>
 
