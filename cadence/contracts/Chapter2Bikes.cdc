@@ -106,8 +106,8 @@ pub contract Chapter2Bikes: NonFungibleToken {
               mediaType: "video/mp4"
             )
             let paintingMedia = MetadataViews.Media(
-              file: MetadataViews.HTTPFile(url: "https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-20-00.png"),
-              mediaType: "image/png"
+              file: MetadataViews.HTTPFile(url: url.concat("chapter2-bharms-the-second-chapter.mp4")),
+              mediaType: "video/mp4"
             )
             return MetadataViews.NFTCollectionDisplay(
               name: "Chapter2Bikes Collection",
