@@ -99,6 +99,8 @@ pub contract Chapter2Bikes: NonFungibleToken {
                 })
             )
           case Type<MetadataViews.NFTCollectionDisplay>():
+            let ipfsHash = self.metadata["ipfsHash"]!
+            let url = "https://ethos.mypinata.cloud/ipfs/".concat(ipfsHash)
             let frameMedia = MetadataViews.Media(
               file: MetadataViews.HTTPFile(url: "https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-50-00.png"),
               mediaType: "video/mp4"
