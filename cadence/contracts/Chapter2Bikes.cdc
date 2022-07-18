@@ -206,6 +206,7 @@ pub contract Chapter2Bikes: NonFungibleToken {
         }
     }
 
+    // Only an admin can create new Admins
     pub fun createNewAdmin(): @Admin {
         return <- create Admin()
     }
