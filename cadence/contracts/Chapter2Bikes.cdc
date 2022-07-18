@@ -33,10 +33,20 @@ import MetadataViews from 0x1d7e57aa55817448
 
 pub contract Chapter2Bikes: NonFungibleToken {
 
-  // Events
+  // -----------------------------------------------------------------------
+  // Chapter2Bikes contract Events
+  // -----------------------------------------------------------------------
+
+  // Emited when the LoveJulesLeather contract is created
   pub event ContractInitialized()
+
+  // Emmited when a user transfers a LoveJulesLeather NFT out of their collection
   pub event Withdraw(id: UInt64, from: Address?)
+
+  // Emmited when a user recieves a LoveJuleLeather NFT into their collection
   pub event Deposit(id: UInt64, to: Address?)
+
+  // Emmited when a LoveJulesLeather NFT is minted
   pub event Minted(id: UInt64)
 
   // Named Paths
