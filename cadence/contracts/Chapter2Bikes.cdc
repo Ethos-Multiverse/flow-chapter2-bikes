@@ -81,15 +81,24 @@ pub contract Chapter2Bikes: NonFungibleToken {
   // have been minted to date. Also used as NFT IDs for minting.
   pub var paintingEditionSupply: UInt64
 
-  // Contract Level Composite Type Definitions
+  // -----------------------------------------------------------------------
+  // Chapter2Bikes contract-level Composite Type definitions
+  // -----------------------------------------------------------------------
+  // These are just *definitions* for Types that this contract
+  // and other accounts can use. These definitions do not contain
+  // actual stored values, but an instance (or object) of one of these Types
+  // can be created by this contract that contains stored values.
+  // -----------------------------------------------------------------------
 
-  // Each NFT is associated to an Edition/Type: Frame or Painting.
+  // Enum that represents a Chapter2Bikes NFT Edition type
+  //
   pub enum Edition: UInt8 {
     pub case Frame
     pub case Painting
   }
 
-  // Resource that represents the a Chapter2Bikes NFT
+  // The resource that represents the Chapter2Bikes NFTs
+  //
   pub resource NFT: NonFungibleToken.INFT, MetadataViews.Resolver {
     pub let id: UInt64
 
@@ -183,7 +192,9 @@ pub contract Chapter2Bikes: NonFungibleToken {
 
   }
 
-  // Public Interface for Collection resource
+  // The interface that users can cast their Chapter2Bikes Collection as
+  // to allow others to deposit Chapter2Bikes into thier Collection. It also
+  // allows for the reading of the details of Chapter2Bikes
   pub resource interface CollectionPublic {
     pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
     pub fun deposit(token: @NonFungibleToken.NFT)
@@ -192,36 +203,54 @@ pub contract Chapter2Bikes: NonFungibleToken {
     pub fun borrowEntireNFT(id: UInt64): &Chapter2Bikes.NFT?
   }
 
-  // Collection resource for managing Chapter2Bikes NFTs
+  // Collection is a resource that every user who owns NFTs
+  // will store in theit account to manage their NFTs
   pub resource Collection: NonFungibleToken.Receiver, NonFungibleToken.Provider, NonFungibleToken.CollectionPublic, CollectionPublic, MetadataViews.ResolverCollection {
-
+    // dictionary of NFT conforming tokens
+    // NFT is a resource type with an UInt64 ID field
+    //
     pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
     
-    // Withdraw
+    // withdraw
+    // Removes an NFT from the collection and moves it to the caller
+    //
     pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
       let token <- self.ownedNFTs.remove(key: withdrawID) ?? panic("Token not found")
       emit Withdraw(id: token.id, from: self.owner?.address)
       return <- token
     }
 
-    // Deposit
+    // deposit
+    // Takes a NFT and adds it to the collections dictionary
+    //
     pub fun deposit(token: @NonFungibleToken.NFT) {
       let myToken <- token as! @Chapter2Bikes.NFT
       emit Deposit(id: myToken.id, to: self.owner?.address)
       self.ownedNFTs[myToken.id] <-! myToken
     }
 
-    // Get IDs array
+    // getIDs returns an arrat of the IDs that are in the collection
     pub fun getIDs(): [UInt64] {
       return self.ownedNFTs.keys
     }
 
-    // Borrow reference to NFT: read id
+    // borrowNFT Returns a borrowed reference to a Chapter2Bikes NFT in the Collection
+    // so that the caller can read its ID
+    //
+    // Parameters: id: The ID of the NFT to get the reference for
+    //
+    // Returns: A reference to the NFT
     pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
       return (&self.ownedNFTs[id] as &NonFungibleToken.NFT?)!
     }
 
-    // Borrow reference to NFT: read all data
+    // borrowEntireNFT returns a borrowed reference to a Chapter2Bikes 
+    // NFT so that the caller can read its data.
+    // They can use this to read its id, description, and edition.
+    //
+    // Parameters: id: The ID of the NFT to get the reference for
+    //
+    // Returns: A reference to the NFT
     pub fun borrowEntireNFT(id: UInt64): &Chapter2Bikes.NFT? {
       if self.ownedNFTs[id] != nil {
         let reference = (&self.ownedNFTs[id] as auth &NonFungibleToken.NFT?)!
@@ -237,7 +266,6 @@ pub contract Chapter2Bikes: NonFungibleToken {
       return chapter2NFT as &AnyResource{MetadataViews.Resolver}
     }
 
-    // Collection initialization
     init() {
       self.ownedNFTs <- {}
     }
@@ -247,16 +275,26 @@ pub contract Chapter2Bikes: NonFungibleToken {
     }
   }
 
-  // Admin Resource
+  // Admin is a special authorization resource that
+  // allows the owner to perform important NFT
+  // functions
   pub resource Admin {
-    // mint Chapter2 NFT
+    // mint
+    // Mints an new NFT
+    // and deposits it in the Admins collection
+    //
     pub fun mint(recipient: &{NonFungibleToken.CollectionPublic}, edition: Chapter2Bikes.Edition, metadata: {String: String}) {
+        // create a new NFT 
         var newNFT <- create NFT(_edition: edition, _metadata: metadata)
 
+        // Deposit it in Admins account using their reference
         recipient.deposit(token: <- newNFT)
     }
 
-    // batch mint Chapter2 NFT
+    // batchMint
+    // Batch mints Chapter2Bikes NFTs
+    // and deposits in the Admins collection
+    //
     pub fun batchMint(recipient: &{NonFungibleToken.CollectionPublic}, edition: Chapter2Bikes.Edition, metadataArray: [{String: String}]) {
         var i: Int = 0
         while i < metadataArray.length {
@@ -265,7 +303,6 @@ pub contract Chapter2Bikes: NonFungibleToken {
         }
     }
 
-    // Only an admin can create new Admins
     pub fun createNewAdmin(): @Admin {
         return <- create Admin()
     }
