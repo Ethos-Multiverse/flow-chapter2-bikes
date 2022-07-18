@@ -109,8 +109,8 @@ pub contract Chapter2Bikes: NonFungibleToken {
               mediaType: "video/mp4"
             )
             return MetadataViews.NFTCollectionDisplay(
-              name: "Chapter2Bikes Frame and Painting Collection",
-              description: "Chapter2Bikes collection description",
+              name: "Chapter2 Frame and Painting Collection",
+              description: "For the past number of years, Bradley Harms has taken a leading role in a new and forward-looking wave of Canadian abstraction, building upon traditions within the medium, while creating work that both reflects and critiques contemporary social and technological developments.",
               externalURL: MetadataViews.ExternalURL("https://chapter2.ethosnft.com"),
               frameImage: frameMedia,
               paintingImage: paintingMedia,
