@@ -64,7 +64,6 @@ pub contract Chapter2Bikes: NonFungibleToken {
       return [
           Type<MetadataViews.Display>(),
           Type<MetadataViews.Editions>(),
-          Type<MetadataViews.ExternalURL>(),
           Type<MetadataViews.NFTCollectionData>(),
           Type<MetadataViews.NFTCollectionDisplay>()
       ]
@@ -85,7 +84,7 @@ pub contract Chapter2Bikes: NonFungibleToken {
             let editionList: [MetadataViews.Edition] = [frameEditionInfo, paintingEditionInfo]
             return MetadataViews.Editions(editionList)
           case Type<MetadataViews.ExternalURL>():
-            return MetadataViews.ExternalURL("https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-50-00.png")
+            return MetadataViews.ExternalURL("https://chapter2.ethosnft.com")
           case Type<MetadataViews.NFTCollectionData>():
             return MetadataViews.NFTCollectionData(
                 storagePath: Chapter2Bikes.CollectionStoragePath,
@@ -110,13 +109,13 @@ pub contract Chapter2Bikes: NonFungibleToken {
               mediaType: "video/mp4"
             )
             return MetadataViews.NFTCollectionDisplay(
-              name: "Chapter2Bikes Collection",
+              name: "Chapter2Bikes Frame and Painting Collection",
               description: "Chapter2Bikes collection description",
-              externalURL: MetadataViews.ExternalURL("https://ethos.mypinata.cloud/ipfs/{ipfs hash}/{collection id}-50-00.png"),
+              externalURL: MetadataViews.ExternalURL("https://chapter2.ethosnft.com"),
               frameImage: frameMedia,
               paintingImage: paintingMedia,
               socials: {
-                "twitter": MetadataViews.ExternalURL("https://twitter.com/ethos_io")
+                "instagram": MetadataViews.ExternalURL("https://www.instagram.com/chapter2bikes")
               }
             )
       }
