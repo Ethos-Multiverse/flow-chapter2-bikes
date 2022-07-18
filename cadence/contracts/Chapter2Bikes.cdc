@@ -37,16 +37,16 @@ pub contract Chapter2Bikes: NonFungibleToken {
   // Chapter2Bikes contract Events
   // -----------------------------------------------------------------------
 
-  // Emited when the LoveJulesLeather contract is created
+  // Emited when the Chapter2Bikes contract is created
   pub event ContractInitialized()
 
-  // Emmited when a user transfers a LoveJulesLeather NFT out of their collection
+  // Emmited when a user transfers a Chapter2Bikes NFT out of their collection
   pub event Withdraw(id: UInt64, from: Address?)
 
-  // Emmited when a user recieves a LoveJuleLeather NFT into their collection
+  // Emmited when a user recieves a Chapter2Bikes NFT into their collection
   pub event Deposit(id: UInt64, to: Address?)
 
-  // Emmited when a LoveJulesLeather NFT is minted
+  // Emmited when a Chapter2Bikes NFT is minted
   pub event Minted(id: UInt64)
 
   // -----------------------------------------------------------------------
