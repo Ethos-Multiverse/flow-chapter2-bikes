@@ -34,7 +34,7 @@ pub contract Chapter2Bikes: NonFungibleToken {
   pub resource NFT: NonFungibleToken.INFT, MetadataViews.Resolver {
     pub let id: UInt64
 
-    pub let edition: Chapter2Bikes.Edition
+    pub let edition: Edition
 
     pub var metadata: {String: String}
 
