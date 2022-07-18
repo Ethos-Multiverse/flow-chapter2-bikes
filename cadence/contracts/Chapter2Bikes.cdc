@@ -373,9 +373,15 @@ pub contract Chapter2Bikes: NonFungibleToken {
     return ""
   }
 
-  // Contract initialization
+  // -----------------------------------------------------------------------
+  // Chapter2Bikes initialization function
+  // -----------------------------------------------------------------------
+  //
+
+  // initializer
+  //
   init() {
-    // Initialize all supplys
+    // Initialize supply: total, frame, painting
     self.totalSupply = 0
     self.frameEditionSupply = 0
     self.paintingEditionSupply = 0
