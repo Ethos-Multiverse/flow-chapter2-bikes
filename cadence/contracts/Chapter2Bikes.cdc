@@ -217,6 +217,44 @@ pub contract Chapter2Bikes: NonFungibleToken {
     pub fun giveAdminRights(cap: Capability<&Admin>)
   }
 
+  // Admin Proxy Resource
+  pub resource AdminProxy: AdminProxyPublic {
+    access(self) var cap: Capability<&Admin>
+
+    init() {
+      self.cap = nil!
+    }
+
+    pub fun giveAdminRights(cap: Capability<&Admin>) {
+      pre {
+        self.cap == nil : "Capability is already set."
+      }
+      self.cap = cap
+    }
+
+    pub fun checkAdminRights(): Bool {
+      return self.cap.check()
+    }
+
+    access(self) fun borrow(): &Admin {
+      pre {
+        self.cap != nil : "Capability is not set."
+        self.checkAdminRights() : "Admin unliked capability."
+      }
+      return self.cap.borrow()!
+    }
+
+    pub fun mint(recipient: &{NonFungibleToken.CollectionPublic}, edition: Chapter2Bikes.Edition, metadata: {String: String}) {
+      let admin = self.borrow()
+      admin.mint(recipient: recipient, edition: edition, metadata: metadata)
+    }
+
+    pub fun batchMint(recipient: &{NonFungibleToken.CollectionPublic}, edition: Chapter2Bikes.Edition, metadataArray: [{String: String}]) {
+      let admin = self.borrow()
+      admin.batchMint(recipient: recipient, edition: edition, metadataArray:metadataArray)
+    }
+  }
+
   // Contract Level Function Defenitions
 
   // Public function to create an empty collection
