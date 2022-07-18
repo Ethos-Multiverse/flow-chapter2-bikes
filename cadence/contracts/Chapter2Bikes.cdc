@@ -351,9 +351,13 @@ pub contract Chapter2Bikes: NonFungibleToken {
     }
   }
 
-  // Contract Level Function Defenitions
+  // -----------------------------------------------------------------------
+  // Chapter2Bikes contract-level function definitions
+  // -----------------------------------------------------------------------
 
-  // Public function to create an empty collection
+  // createEmptyCollection
+  // public function that anyone can call to create a new empty collection
+  //
   pub fun createEmptyCollection(): @NonFungibleToken.Collection {
     return <- create Collection()
   }
