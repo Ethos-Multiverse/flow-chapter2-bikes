@@ -58,9 +58,27 @@ pub contract Chapter2Bikes: NonFungibleToken {
   pub let AdminStoragePath: StoragePath
   pub let AdminPrivatePath: PrivatePath
 
-  // Contract Level Fields
+  // -----------------------------------------------------------------------
+  // Chapter2Bikes contract-level fields.
+  // These contain actual values that are stored in the smart contract.
+  // -----------------------------------------------------------------------
+
+  // The total number of Chapter2Bikes NFTs that have been created
+  // Because NFTs can be destroyed, it doesn't necessarily mean that this
+  // reflects the total number of NFTs in existence, just the number that
+  // have been minted to date. Also used as NFT IDs for minting.
   pub var totalSupply: UInt64
+
+  // The total number of Chapter2Bikes Frame edition NFTs that have been created
+  // Because NFTs can be destroyed, it doesn't necessarily mean that this
+  // reflects the total number of NFTs in existence, just the number that
+  // have been minted to date. Also used as NFT IDs for minting.
   pub var frameEditionSupply: UInt64
+
+  // The total number of Chapter2Bikes Painting edition NFTs that have been created
+  // Because NFTs can be destroyed, it doesn't necessarily mean that this
+  // reflects the total number of NFTs in existence, just the number that
+  // have been minted to date. Also used as NFT IDs for minting.
   pub var paintingEditionSupply: UInt64
 
   // Contract Level Composite Type Definitions
