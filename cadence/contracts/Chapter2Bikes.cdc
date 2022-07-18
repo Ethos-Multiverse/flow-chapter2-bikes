@@ -362,7 +362,9 @@ pub contract Chapter2Bikes: NonFungibleToken {
     return <- create Collection()
   }
 
-  // Map edition type to string
+  // editionToString
+  // public function that anyone can call to convert an edition to a string
+  //
   pub fun editionString(_ edition: Edition): String {
     switch edition {
       case Edition.Frame:
