@@ -1,3 +1,33 @@
+/*
+    Description: Central Smart Contract for Chapter2 Bikes
+    
+    This smart contract contains the core functionality for 
+    Chapter2 Bikes, created by Ethos Multiverse Inc.
+    
+    The contract manages the data associated with each NFT and 
+    the distribution of each NFT to recipients.
+    
+    Admins throught their admin resource object have the power 
+    to do all of the important actions in the smart contract such 
+    as minting and batch minting.
+    
+    When NFTs are minted, they are initialized with a metadata object and an Edition type and then
+    stored in the admins Collection.
+    
+    The contract also defines a Collection resource. This is an object that 
+    every Chapter2 NFT owner will store in their account
+    to manage their NFT collection.
+    
+    The main Chapter2 Bikes account operated by Ethos Multiverse Inc. 
+    will also have its own Chapter2 collection it can use to hold its 
+    own NFT's that have not yet been sent to a user.
+    
+    Note: All state changing functions will panic if an invalid argument is
+    provided or one of its pre-conditions or post conditions aren't met.
+    Functions that don't modify state will simply return 0 or nil 
+    and those cases need to be handled by the caller.
+*/
+
 import NonFungibleToken from 0x1d7e57aa55817448
 import MetadataViews from 0x1d7e57aa55817448
 
