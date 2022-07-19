@@ -7,7 +7,7 @@ Admins are granted power through the `Admin` resource.
 Admins can withdraw NFTs that reside in the `Chapter2BikesCollection` resource to recipients
 ## Live Project  
 
-link
+https://chapter2bikes.ethosnft.com/
 ## Video demo  
 
 link
