@@ -9,13 +9,13 @@ The smart contracts are written in Cadence, a resource oriented smart contract p
 If you see an issue with the code for the contracts, the transactions, scripts, documentation, or anything else, please do not hesitate to make an issue or a pull request with your desired changes. This is an open source project and we welcome all assistance from the community!
 ## Chapter2 Bikes Contract Addresses
 
-: This is the main ___ smart contract that defines the core functionality of the NFT.
+`Chapter2Bikes`: This is the main Chapter2 smart contract that defines the core functionality of the NFT.
 
 | **Network** | **Contract Address** |
 |---|---|
-| Testnet | |
-| Mainnet | |
-``: This is the ___ marketplace contract that allows users to buy and sell their NFTs.
+| Testnet | `0xd8144e7c81e68eb9` |
+| Mainnet | `0x6a8a6bd12143eaa5` |
+`Chapter2BikesMarket`: This is the Chapter2 marketplace contract that allows users to buy and sell their NFTs.
 
 | **Network** | **Contract Address** |
 |---|---|
