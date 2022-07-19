@@ -1,5 +1,5 @@
-import Chapter2Bikes from 0xf8d6e0586b0a20c7
-import NonFungibleToken from 0xf8d6e0586b0a20c7
+import Chapter2Bikes from "../../contracts/Chapter2Bikes.cdc"
+import NonFungibleToken from "../../standards/NonFungibleToken.cdc"
 
 transaction(edition: UInt8, metadata: [{String: String}]) {
 
