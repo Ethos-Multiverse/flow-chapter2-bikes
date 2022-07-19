@@ -13,8 +13,8 @@ If you see an issue with the code for the contracts, the transactions, scripts, 
 
 | **Network** | **Contract Address** |
 |---|---|
-| Testnet | `0xd8144e7c81e68eb9` |
-| Mainnet | `0x6a8a6bd12143eaa5` |
+| Testnet | `0xd8144e7c81e68eb9` [flowscan](https://testnet.flowscan.org/account/0xd8144e7c81e68eb9) |
+| Mainnet | `0x6a8a6bd12143eaa5` [flowscan](https://flowscan.org/account/0x6a8a6bd12143eaa5) |
 `Chapter2BikesMarket`: This is the Chapter2 marketplace contract that allows users to buy and sell their NFTs.
 
 | **Network** | **Contract Address** |
